@@ -1,0 +1,30 @@
+
+@keyframes translateX-from-left {
+  0% {
+    transform: translate(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0);
+    opacity: 1;
+  }
+}
+.slide-in-from-left{
+  animation: translateX-from-left  ease-in-out 1.5s;
+  animation-fill-mode: forwards;
+}
+@keyframes translateX-from-right {
+  0% {
+    transform: translate(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0);
+    opacity: 1;
+  }
+}
+.slide-in-from-right{
+  animation: translateX-from-right ease-in-out 1s;
+  animation-delay: 2s;
+  animation-fill-mode: forwards;
+}

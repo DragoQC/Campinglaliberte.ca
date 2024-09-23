@@ -1,0 +1,96 @@
+form{
+  & .input_container{
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    input,textarea{
+      border-radius: 1em;
+      padding: 0.1em 0.4em 0.1em 0.4em;
+      background:white;
+      border: 2px solid #C4DAD2;
+      outline: none;
+      
+    }
+    input:focus,textarea:focus{
+      border: 2px solid #6A9C89;
+    }
+  }
+  & input[type="checkbox"]{
+    height: fit-content;
+    align-self: center;
+    justify-self: start;
+  }
+}
+
+
+.w1 {
+  stroke: none;
+  fill: #6A9C89;
+  opacity: 55%;
+  animation: move1 5s ease-in-out infinite;
+}
+.w2 {
+  stroke: none;
+  fill: #6A9C89;
+  opacity: 35%;
+  transform: translate3d(0, 0, 0);
+  animation: move2 4s ease-in-out infinite;
+}
+.w3 {
+  stroke: none;
+  fill: #6A9C89;
+  opacity: 30%;
+  transform: translate3d(0, 0, 0);
+  animation: move3 6s ease-in-out infinite;
+}
+@keyframes move1 {
+  0% {
+    transform: translateX(-500px) scaleX(2.5);
+  }
+  25% {
+    transform: translateX(-100) scaleX(2.5);
+  }
+  50% {
+    transform: translateX(0) scaleX(2.5);
+  }
+  75% {
+    transform: translateX(-100) scaleX(2.5);
+  }
+  100% {
+    transform: translateX(-500px) scaleX(2.5);
+  }
+}
+@keyframes move2 {
+  0% {
+    transform: translateX(-600px) scaleX(3);
+  }
+  25% {
+    transform: translateX(-100) scaleX(2.5);
+  }
+  50% {
+    transform: translateX(0) scaleX(3);
+  }
+  75% {
+    transform: translateX(-100) scaleX(2.5);
+  }
+  100% {
+    transform: translateX(-600px) scaleX(3);
+  }
+}
+@keyframes move3 {
+  0% {
+    transform: translateX(-600px) scaleX(3);
+  }
+  25% {
+    transform: translateX(-100) scaleX(2.5);
+  }
+  50% {
+    transform: translateX(0) scaleX(3);
+  }
+  75% {
+    transform: translateX(-100) scaleX(2.5);
+  }
+  100% {
+    transform: translateX(-600px) scaleX(3);
+  }
+}
