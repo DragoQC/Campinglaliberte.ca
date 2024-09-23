@@ -4,11 +4,11 @@ import "../css/contact.css";
 
 
 function Contact() {
-  const [form_data,set_form_data] = useState({
-    fn:"",
-    ln:"",
-    email:"",
-    phone:"",
+  const [form_data, set_form_data] = useState({
+    fn: "",
+    ln: "",
+    email: "",
+    phone: "",
 
   })
 
@@ -22,48 +22,51 @@ function Contact() {
 
       <section className="w-[90%] mx-auto bg-[#E9EFEC] bg-opacity-60 p-4 gap-3 rounded-xl xl:w-[80%] lg:w-[70%] ">
         <form action="" className=" grid grid-cols-12 row-span-3 gap-3 justify-start w-full relative">
-        <div className="input_container flex flex-col col-span-6 h-fit row-start-1 text-start">
+          <div className="input_container flex flex-col col-span-5 h-fit row-start-1 text-start">
             <label htmlFor="fn">Prénom : </label>
-            <input type="text" className="fn" id="fn"/>
+            <input type="text" className="fn" id="fn" />
             <div className="form_error"></div>
           </div>
-          <div className="input_container row-start-2 col-span-6 text-start">
-            <label htmlFor="ln">Nom : </label>
-            <input type="text" className="ln" id="ln"/>
-            <div className="form_error"></div>
-          </div>
-          
 
-          <div className="input_container row-start-3 col-span-6 text-start">
-            <label htmlFor="email">Courriel : </label>
-            <input type="text" className="email" id="email"/>
+          <div className="input_container row-start-2 col-span-5 text-start">
+            <label htmlFor="ln">Nom : </label>
+            <input type="text" className="ln" id="ln" />
             <div className="form_error"></div>
           </div>
-          <div className="input_container row-start-4 col-span-6 text-start col-start-1">
-            <label htmlFor="phone">Numéro de téléphone : </label>
-            <input type="text" className="phone" id="phone"/>
+
+          <div className="input_container row-start-3 col-span-5 text-start col-start-1">
+            <label htmlFor="phone">Numéro de <span className="whitespace-nowrap">téléphone : </span></label>
+            <input type="text" className="phone" id="phone" />
             <div className="form_error"></div>
           </div>
-          <div className="input_container row-start-4 col-start-8 col-span-3 max-md:col-span-5 max-md:col-start-8 row-span-2">
+
+          <div className="input_container row-start-2 col-start-6 col-span-2 row-span-2 max-md:row-start-4 max-md:col-start-8 max-md:col-span-4">
             <div>Raison de la demande (Facultatif)</div>
             <div className="flex flex-col gap-2">
               <div>
-              <label htmlFor="wood" className="text-end">Bois <i className="fa-solid fa-fire my-auto mr-2"></i></label>
-              <input type="checkbox" className="wood" id="wood" />
+                <label htmlFor="wood" className="text-end">Bois <i className="fa-solid fa-fire my-auto mr-2"></i></label>
+                <input type="checkbox" className="wood" id="wood" />
               </div>
               <div>
-              <label htmlFor="rent" className="text-end">Location <i className="fa-solid fa-tents my-auto mr-2"></i></label>
-              <input type="checkbox" className="rent" id="rent"/>
+                <label htmlFor="rent" className="text-end">Location <i className="fa-solid fa-tents my-auto mr-2"></i></label>
+                <input type="checkbox" className="rent" id="rent" />
               </div>
-              
             </div>
-
           </div>
-          <div className="input_container row-start-5 col-span-6 text-start max-md:col-span-7 col-start-1 xl:px-5">
+
+
+          <div className="input_container row-start-4 col-span-6 text-start">
+            <label htmlFor="email">Courriel : </label>
+            <input type="text" className="email" id="email" />
+            <div className="form_error"></div>
+          </div>
+
+          <div className="input_container row-start-5 col-span-6 text-start max-md:col-span-7 col-start-1">
             <label htmlFor="comment">Commentaire : </label>
             <textarea name="comment" className="min-h-32" id="comment"></textarea>
             <div className="form_error"></div>
           </div>
+
           <div className="col-span-5 col-start-8 row-start-1 row-span-3 max-md:col-start-7 max-md:col-span-6 bg-[#C4DAD2] p-4 rounded-xl">
             <div className="">
               <a href="mailto:info@campinglaliberte.ca" className="flex flex-row gap-5 align-middle text-center text-xl">
@@ -86,7 +89,7 @@ function Contact() {
               </a>
               <p className="lg:my-2">617 rang saint-louis ouest, lourdes QC</p>
             </div>
-            
+
           </div>
           <button className="col-start-11 row-start-4 col-span-2 h-fit max-md:row-start-6 max-md:col-start-5 max-md:col-span-4 md:absolute md:bottom-0 md:right-0">Soumettre</button>
         </form>
