@@ -9,8 +9,16 @@ function Contact() {
     ln: "",
     email: "",
     phone: "",
-
+    comment:""
   })
+  const [errors, set_errors] = useState<{ fn?: string; ln?: string; email?: string; phone?: string }>({});
+
+  function handle_change(event: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>){
+    set_form_data({
+      ...form_data,
+      [event.target.id]: event.target.value,  // Dynamically update form data based on input id
+    });
+  }
 
   return (
     <div className="text-black">
@@ -24,19 +32,19 @@ function Contact() {
         <form action="" className=" grid grid-cols-12 row-span-3 gap-3 justify-start w-full relative">
           <div className="input_container flex flex-col col-span-5 h-fit row-start-1 text-start">
             <label htmlFor="fn">Prénom : </label>
-            <input type="text" className="fn" id="fn" />
+            <input type="text" className="fn" id="fn" value={form_data.fn} onChange={handle_change}/>
             <div className="form_error"></div>
           </div>
 
           <div className="input_container row-start-2 col-span-5 text-start">
             <label htmlFor="ln">Nom : </label>
-            <input type="text" className="ln" id="ln" />
+            <input type="text" className="ln" id="ln" value={form_data.ln} onChange={handle_change}/>
             <div className="form_error"></div>
           </div>
 
           <div className="input_container row-start-3 col-span-5 text-start col-start-1">
             <label htmlFor="phone">Numéro de <span className="whitespace-nowrap">téléphone : </span></label>
-            <input type="text" className="phone" id="phone" />
+            <input type="text" className="phone" id="phone" value={form_data.phone} onChange={handle_change}/>
             <div className="form_error"></div>
           </div>
 
@@ -57,13 +65,13 @@ function Contact() {
 
           <div className="input_container row-start-4 col-span-6 text-start">
             <label htmlFor="email">Courriel : </label>
-            <input type="text" className="email" id="email" />
+            <input type="text" className="email" id="email" value={form_data.email} onChange={handle_change}/>
             <div className="form_error"></div>
           </div>
 
           <div className="input_container row-start-5 col-span-6 text-start max-md:col-span-7 col-start-1">
             <label htmlFor="comment">Commentaire : </label>
-            <textarea name="comment" className="min-h-32" id="comment"></textarea>
+            <textarea name="comment" className="min-h-32" id="comment" value={form_data.comment} onChange={handle_change}></textarea>
             <div className="form_error"></div>
           </div>
 
