@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useOutletContext, useNavigate } from "react-router-dom";
 import "../css/contact.css";
+import { render } from "react-dom";
 
 
 function Contact() {
@@ -11,13 +12,66 @@ function Contact() {
     phone: "",
     comment:""
   })
-  const [errors, set_errors] = useState<{ fn?: string; ln?: string; email?: string; phone?: string }>({});
+  const [form_errors, set_form_errors] = useState({
+    fn: "",
+    ln: "",
+    email: "",
+    phone: "",
+    comment: ""
+  });
 
   function handle_change(event: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>){
     set_form_data({
       ...form_data,
       [event.target.id]: event.target.value,  // Dynamically update form data based on input id
     });
+  }
+  function render_error(error_message:string|undefined){
+    if(error_message){
+      return <div className="text-red-600 ">{error_message}<span className="text-red-400 animate-pulse whitespace-nowrap"> !</span></div>
+    }else{
+      return null;
+    }
+  }
+  function validate_form(){
+    let is_valid: boolean = true;
+    let error_list:any = {};
+    if(!form_data.fn.trim()){
+      error_list.fn = "Prénom requis"
+    }
+    if(!form_data.ln.trim()){
+      error_list.ln = "Nom requis"
+    }
+    if(!form_data.phone.trim()){
+      error_list.phone = "Le numéro de téléphone est requis"
+    }
+    if(!form_data.email.trim()){
+      error_list.email = "Le courriel est requis pour que nous puissions communiquer avec vous"
+    }else if (!/\S+@\S+\.\S+/.test(form_data.email)) {
+      error_list.email = "Le courriel n'a pas la bonne forme.";
+    }
+    if(!form_data.comment.trim()){
+      error_list.comment = "Laissez nous la raison de votre demande"
+    }
+    if (Object.keys(error_list).length > 0) {
+      set_form_errors(error_list);
+      return false; 
+    } else {
+      set_form_errors({
+        fn: "",
+        ln: "",
+        email: "",
+        phone: "",
+        comment: "",
+      });
+      return true;
+    }
+  }
+  function handle_submit(event: React.FormEvent<HTMLFormElement>){
+    event.preventDefault();
+    if(validate_form()){
+
+    }
   }
 
   return (
@@ -29,27 +83,27 @@ function Contact() {
       </div>
 
       <section className="w-[90%] mx-auto bg-[#E9EFEC] bg-opacity-60 p-4 gap-3 rounded-xl xl:w-[80%] lg:w-[70%] ">
-        <form action="" className=" grid grid-cols-12 row-span-3 gap-3 justify-start w-full relative">
+        <form action="" className=" grid grid-cols-12 row-span-3 gap-3 justify-start w-full relative" onSubmit={handle_submit}>
           <div className="input_container flex flex-col col-span-5 h-fit row-start-1 text-start">
-            <label htmlFor="fn">Prénom : </label>
+            <label htmlFor="fn">Prénom<span className="text-red-600">*</span> : </label>
             <input type="text" className="fn" id="fn" value={form_data.fn} onChange={handle_change}/>
-            <div className="form_error"></div>
+            {render_error(form_errors.fn)}
           </div>
 
           <div className="input_container row-start-2 col-span-5 text-start">
-            <label htmlFor="ln">Nom : </label>
+            <label htmlFor="ln">Nom<span className="text-red-600">*</span> : </label>
             <input type="text" className="ln" id="ln" value={form_data.ln} onChange={handle_change}/>
-            <div className="form_error"></div>
+            {render_error(form_errors.ln)}
           </div>
 
           <div className="input_container row-start-3 col-span-5 text-start col-start-1">
-            <label htmlFor="phone">Numéro de <span className="whitespace-nowrap">téléphone : </span></label>
+            <label htmlFor="phone">Numéro de <span className="whitespace-nowrap">téléphone<span className="text-red-600">*</span> : </span></label>
             <input type="text" className="phone" id="phone" value={form_data.phone} onChange={handle_change}/>
-            <div className="form_error"></div>
+            {render_error(form_errors.phone)}
           </div>
 
           <div className="input_container row-start-2 col-start-6 col-span-2 row-span-2 max-md:row-start-4 max-md:col-start-8 max-md:col-span-4">
-            <div>Raison de la demande (Facultatif)</div>
+            <div>Raison de la demande</div>
             <div className="flex flex-col gap-2">
               <div>
                 <label htmlFor="wood" className="text-end">Bois <i className="fa-solid fa-fire my-auto mr-2"></i></label>
@@ -64,15 +118,15 @@ function Contact() {
 
 
           <div className="input_container row-start-4 col-span-6 text-start">
-            <label htmlFor="email">Courriel : </label>
+            <label htmlFor="email">Courriel<span className="text-red-600">*</span> : </label>
             <input type="text" className="email" id="email" value={form_data.email} onChange={handle_change}/>
-            <div className="form_error"></div>
+            {render_error(form_errors.email)}
           </div>
 
           <div className="input_container row-start-5 col-span-6 text-start max-md:col-span-7 col-start-1">
-            <label htmlFor="comment">Commentaire : </label>
+            <label htmlFor="comment">Commentaire<span className="text-red-600">*</span> : </label>
             <textarea name="comment" className="min-h-32" id="comment" value={form_data.comment} onChange={handle_change}></textarea>
-            <div className="form_error"></div>
+            {render_error(form_errors.comment)}
           </div>
 
           <div className="col-span-5 col-start-8 row-start-1 row-span-3 max-md:col-start-7 max-md:col-span-6 bg-[#C4DAD2] p-4 rounded-xl">
