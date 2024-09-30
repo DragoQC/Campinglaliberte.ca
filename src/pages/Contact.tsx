@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useOutletContext, useNavigate } from "react-router-dom";
 import "../css/contact.css";
 import { render } from "react-dom";
+import {email_info} from "../gitignored/email_info"
+import emailjs from "@emailjs/browser";
 
 
 function Contact() {
@@ -70,7 +72,18 @@ function Contact() {
   function handle_submit(event: React.FormEvent<HTMLFormElement>){
     event.preventDefault();
     if(validate_form()){
-
+      emailjs.send(
+        email_info.service_id,
+        email_info.template_id,
+        form_data,
+        email_info.public_key
+      )
+      .then((response) => {
+        console.log("Email sent successfully", response.status, response.text);
+      })
+      .catch((error) => {
+        console.error("Error sending email:", error);
+      });
     }
   }
 
@@ -84,25 +97,25 @@ function Contact() {
 
       <section className="w-[90%] mx-auto bg-[#E9EFEC] bg-opacity-60 p-4 gap-3 rounded-xl xl:w-[80%] lg:w-[70%] ">
         <form action="" className=" grid grid-cols-12 row-span-3 gap-3 justify-start w-full relative" onSubmit={handle_submit}>
-          <div className="input_container flex flex-col col-span-5 h-fit row-start-1 text-start">
+          <div className="input_container flex flex-col col-span-5 h-fit row-start-1 text-start max-sm:row-start-2 max-sm:col-span-12">
             <label htmlFor="fn">Prénom<span className="text-red-600">*</span> : </label>
             <input type="text" className="fn" id="fn" value={form_data.fn} onChange={handle_change}/>
             {render_error(form_errors.fn)}
           </div>
 
-          <div className="input_container row-start-2 col-span-5 text-start">
+          <div className="input_container row-start-2 col-span-5 text-start max-sm:row-start-3 max-sm:col-span-12">
             <label htmlFor="ln">Nom<span className="text-red-600">*</span> : </label>
             <input type="text" className="ln" id="ln" value={form_data.ln} onChange={handle_change}/>
             {render_error(form_errors.ln)}
           </div>
 
-          <div className="input_container row-start-3 col-span-5 text-start col-start-1">
+          <div className="input_container row-start-3 col-span-5 text-start col-start-1 max-sm:col-span-12 max-sm:row-start-4 max-sm:col-start-1">
             <label htmlFor="phone">Numéro de <span className="whitespace-nowrap">téléphone<span className="text-red-600">*</span> : </span></label>
             <input type="text" className="phone" id="phone" value={form_data.phone} onChange={handle_change}/>
             {render_error(form_errors.phone)}
           </div>
 
-          <div className="input_container row-start-2 col-start-6 col-span-2 row-span-2 max-md:row-start-4 max-md:col-start-8 max-md:col-span-4">
+          <div className="input_container row-start-2 col-start-6 col-span-2 row-span-2 max-md:row-start-4 max-md:col-start-8 max-md:col-span-4 max-sm:col-start-1 max-sm:col-span-12 max-sm:row-start-7">
             <div>Raison de la demande</div>
             <div className="flex flex-col gap-2">
               <div>
@@ -117,19 +130,19 @@ function Contact() {
           </div>
 
 
-          <div className="input_container row-start-4 col-span-6 text-start">
+          <div className="input_container row-start-4 col-span-6 text-start max-sm:col-start-1 max-sm:col-span-12 max-sm:row-start-6">
             <label htmlFor="email">Courriel<span className="text-red-600">*</span> : </label>
             <input type="text" className="email" id="email" value={form_data.email} onChange={handle_change}/>
             {render_error(form_errors.email)}
           </div>
 
-          <div className="input_container row-start-5 col-span-6 text-start max-md:col-span-7 col-start-1">
+          <div className="input_container row-start-5 col-span-6 text-start max-md:col-span-7 col-start-1 max-sm:col-span-12 max-sm:col-start-1 max-sm:row-start-9">
             <label htmlFor="comment">Commentaire<span className="text-red-600">*</span> : </label>
             <textarea name="comment" className="min-h-32" id="comment" value={form_data.comment} onChange={handle_change}></textarea>
             {render_error(form_errors.comment)}
           </div>
 
-          <div className="col-span-5 col-start-8 row-start-1 row-span-3 max-md:col-start-7 max-md:col-span-6 bg-[#C4DAD2] p-4 rounded-xl">
+          <div className="col-span-5 col-start-8 row-start-1 row-span-3 max-md:col-start-7 max-md:col-span-6 bg-[#C4DAD2] p-4 rounded-xl max-sm:row-start-1 max-sm:col-span-12 max-sm:col-start-1 max-sm:row-span-1">
             <div className="">
               <a href="mailto:info@campinglaliberte.ca" className="flex flex-row gap-5 align-middle text-center text-xl">
                 <i className="fa-solid fa-envelope my-auto"></i>
@@ -153,7 +166,7 @@ function Contact() {
             </div>
 
           </div>
-          <button className="col-start-11 row-start-4 col-span-2 h-fit max-md:row-start-6 max-md:col-start-5 max-md:col-span-4 md:absolute md:bottom-0 md:right-0">Soumettre</button>
+          <button className="col-start-11 row-start-4 col-span-2 h-fit max-md:row-start-6 max-md:col-start-5 max-md:col-span-4 md:absolute md:bottom-0 md:right-0 max-sm:col-span-12 max-sm:row-start-10">Soumettre</button>
         </form>
 
 
