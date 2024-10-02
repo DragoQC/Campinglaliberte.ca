@@ -115,35 +115,35 @@ function Contact() {
 
   return (
     <div className="text-black">
-      <div className="w-[80%] mx-auto xl:w-[70%] lg:w-[60%] pb-3">
+      <div className="w-[80%] mx-auto lg:w-[70%] xl:w-[60%] pb-3">
         <h1>Nous joindre</h1>
         <p>La meilleure facon de nous joindre est soit par courriel : info@campinglaliberte.ca ou sur facebook</p>
         <p>Pour toutes demande de réservations ou de bois vous pouvez passer par se formulaire et nous vous répondrons par courriel dans les plus brefs délais</p>
       </div>
 
-      <section className="w-[90%] mx-auto bg-[#E9EFEC] bg-opacity-60 p-4 gap-3 rounded-xl xl:w-[80%] lg:w-[70%] ">
+      <section className="w-[90%] mx-auto bg-[#E9EFEC] bg-opacity-60 p-4 gap-3 rounded-xl  lg:w-[70%] xl:w-[60%]">
         <form action="" className=" grid grid-cols-12 row-span-3 gap-3 justify-start w-full relative" onSubmit={handle_submit}>
           <div className="input_container flex flex-col col-span-5 h-fit row-start-1 text-start max-sm:row-start-2 max-sm:col-span-12">
-            <label htmlFor="fn">Prénom<span className="text-red-600">*</span> : </label>
+            <label htmlFor="fn" className="amatic text-2xl">Prénom<span className="text-red-600">*</span> : </label>
             <input type="text" className="fn" id="fn" value={form_data.fn} onChange={handle_change} />
             {render_error(form_errors.fn)}
           </div>
 
           <div className="input_container row-start-2 col-span-5 text-start max-sm:row-start-3 max-sm:col-span-12">
-            <label htmlFor="ln">Nom<span className="text-red-600">*</span> : </label>
+            <label htmlFor="ln" className="amatic text-2xl">Nom<span className="text-red-600">*</span> : </label>
             <input type="text" className="ln" id="ln" value={form_data.ln} onChange={handle_change} />
             {render_error(form_errors.ln)}
           </div>
 
           <div className="input_container row-start-3 col-span-5 text-start col-start-1 max-sm:col-span-12 max-sm:row-start-4 max-sm:col-start-1">
-            <label htmlFor="phone">Numéro de <span className="whitespace-nowrap">téléphone<span className="text-red-600">*</span> : </span></label>
+            <label htmlFor="phone" className="amatic text-2xl">Numéro de <span className="whitespace-nowrap amatic">téléphone<span className="text-red-600">*</span> : </span></label>
             <input type="text" className="phone" id="phone" value={form_data.phone} onChange={handle_change} />
             {render_error(form_errors.phone)}
           </div>
 
-          <div className="input_container row-start-2 col-start-6 col-span-2 row-span-2 max-md:row-start-4 max-md:col-start-8 max-md:col-span-4 max-sm:col-start-1 max-sm:col-span-12 max-sm:row-start-7">
-            <div>Raison de la demande</div>
-            <div className="flex flex-col gap-2">
+          <div className="input_container row-start-5 col-start-1 col-span-5 max-sm:col-start-1 max-sm:col-span-12 max-sm:row-start-7">
+            <div className="text-start amatic text-2xl">Raison de la demande :</div>
+            <div className="flex flex-row gap-2">
               <div>
                 <label htmlFor="wood" className="text-end">Bois <i className="fa-solid fa-fire my-auto mr-2"></i></label>
                 <input type="checkbox" className="wood" id="wood" />
@@ -156,43 +156,43 @@ function Contact() {
           </div>
 
 
-          <div className="input_container row-start-4 col-span-6 text-start max-sm:col-start-1 max-sm:col-span-12 max-sm:row-start-6">
-            <label htmlFor="email">Courriel<span className="text-red-600">*</span> : </label>
+          <div className="input_container row-start-4 col-span-5 text-start max-sm:col-start-1 max-sm:col-span-12 max-sm:row-start-6">
+            <label htmlFor="email" className="amatic text-2xl">Courriel<span className="text-red-600">*</span> : </label>
             <input type="text" className="email" id="email" value={form_data.email} onChange={handle_change} />
             {render_error(form_errors.email)}
           </div>
 
-          <div className="input_container row-start-5 col-span-6 text-start max-md:col-span-7 col-start-1 max-sm:col-span-12 max-sm:col-start-1 max-sm:row-start-9">
-            <label htmlFor="comment">Commentaire<span className="text-red-600">*</span> : </label>
+          <div className="input_container row-start-6 col-span-6 text-start max-md:col-span-7 col-start-1 max-sm:col-span-12 max-sm:col-start-1 max-sm:row-start-9">
+            <label htmlFor="comment" className="amatic text-2xl">Commentaire<span className="text-red-600">*</span> : </label>
             <textarea name="comment" className="min-h-32" id="comment" value={form_data.comment} onChange={handle_change}></textarea>
             {render_error(form_errors.comment)}
           </div>
 
-          <div className="col-span-5 col-start-8 row-start-1 row-span-3 max-md:col-start-7 max-md:col-span-6 bg-[#C4DAD2] p-4 rounded-xl max-sm:row-start-1 max-sm:col-span-12 max-sm:col-start-1 max-sm:row-span-1">
+          <div className="col-span-6 col-start-7 row-start-1 row-span-4 justify-evenly flex flex-col max-md:col-start-7 max-md:col-span-6 bg-[#C4DAD2] p-4 rounded-xl max-sm:row-start-1 max-sm:col-span-12 max-sm:col-start-1 max-sm:row-span-1">
             <div className="">
               <a href="mailto:info@campinglaliberte.ca" className="flex flex-row gap-5 align-middle text-center text-xl">
                 <i className="fa-solid fa-envelope my-auto"></i>
-                <h2>info@campinglaliberte.ca</h2>
+                <h2 className="text-2xl amatic">info@campinglaliberte.ca</h2>
               </a>
               <p className="lg:my-2">Pour toutes informations écrivez nous a ce courriel</p>
             </div>
             <div className="">
               <a href="https://www.facebook.com/CampingLaliberte?locale=fr_CA" className="flex flex-row gap-5 align-middle text-center text-xl">
                 <i className="fa-brands fa-facebook my-auto"></i>
-                <h2 className="lg:my-2">Notre page Facebook</h2>
+                <h2 className="lg:my-2 text-2xl amatic">Notre page Facebook</h2>
               </a>
               <p>Suivez notre actualité sur Facebook</p>
             </div>
             <div className="">
               <a href="https://maps.app.goo.gl/A7PNrHLB4qFP3sq38" className="flex flex-row gap-5 align-middle text-center text-xl">
                 <i className="fa-solid fa-location-dot my-auto"></i>
-                <h2>Notre localisation</h2>
+                <h2 className="text-2xl amatic">Notre localisation</h2>
               </a>
               <p className="lg:my-2">617 rang saint-louis ouest, lourdes QC</p>
             </div>
 
           </div>
-          <button className="col-start-11 row-start-4 col-span-2 h-fit max-md:row-start-6 max-md:col-start-5 max-md:col-span-4 md:absolute md:bottom-0 md:right-0 max-sm:col-span-12 max-sm:row-start-10" id="submit" disabled={JSON.parse(is_submited || "false") === true}>{JSON.parse(is_submited || "false") === true ? (<div className="whitespace-nowrap animate-pulse">Envoyé!</div>) : button_text}</button>
+          <button className="col-start-7 self-end row-start-6 col-span-2 h-fit max-md:row-start-6 max-md:col-start-8 max-md:col-span-5  max-sm:col-span-12 max-sm:row-start-10" id="submit" disabled={JSON.parse(is_submited || "false") === true}>{JSON.parse(is_submited || "false") === true ? (<div className="whitespace-nowrap animate-pulse">Envoyé!</div>) : button_text}</button>
         </form>
 
 
