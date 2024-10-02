@@ -12,7 +12,7 @@ function Home() {
         <h1 className="">Camping Laliberté</h1>
         <p className="px-5 text-xl">
           Notre camping est un lieu où nature et convivialité se rencontrent. Passionnés
-          par les animaux et les relations humaines, nous vous offrons un environnement propre et accueillant.
+          par les animaux et les bonnes relations, nous vous offrons un environnement propre et accueillant.
         </p>
 
 

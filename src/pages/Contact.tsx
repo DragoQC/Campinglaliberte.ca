@@ -1,18 +1,22 @@
 import { useEffect, useState } from "react";
-import { useOutletContext, useNavigate } from "react-router-dom";
+import { useOutletContext, useNavigate, json } from "react-router-dom";
 import "../css/contact.css";
 import { render } from "react-dom";
-import {email_info} from "../gitignored/email_info"
+import { email_info } from "../gitignored/email_info"
 import emailjs from "@emailjs/browser";
 
 
 function Contact() {
+  const [button_text, set_button_text] = useState<string | JSX.Element>("Soumettre");
+  const is_submited = localStorage.getItem("is_submited");
+
+  console.log(is_submited)
   const [form_data, set_form_data] = useState({
     fn: "",
     ln: "",
     email: "",
     phone: "",
-    comment:""
+    comment: ""
   })
   const [form_errors, set_form_errors] = useState({
     fn: "",
@@ -22,42 +26,47 @@ function Contact() {
     comment: ""
   });
 
-  function handle_change(event: React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>){
+  function handle_change(event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     set_form_data({
       ...form_data,
       [event.target.id]: event.target.value,  // Dynamically update form data based on input id
     });
   }
-  function render_error(error_message:string|undefined){
-    if(error_message){
+  function render_error(error_message: string | undefined) {
+    if (error_message) {
       return <div className="text-red-600 ">{error_message}<span className="text-red-400 animate-pulse whitespace-nowrap"> !</span></div>
-    }else{
+    } else {
       return null;
     }
   }
-  function validate_form(){
+  function validate_form() {
     let is_valid: boolean = true;
-    let error_list:any = {};
-    if(!form_data.fn.trim()){
+    let error_list: any = {};
+    if (!form_data.fn.trim()) {
       error_list.fn = "Prénom requis"
     }
-    if(!form_data.ln.trim()){
+    if (!form_data.ln.trim()) {
       error_list.ln = "Nom requis"
     }
-    if(!form_data.phone.trim()){
+    if (!form_data.phone.trim()) {
       error_list.phone = "Le numéro de téléphone est requis"
     }
-    if(!form_data.email.trim()){
+    if (!form_data.email.trim()) {
       error_list.email = "Le courriel est requis pour que nous puissions communiquer avec vous"
-    }else if (!/\S+@\S+\.\S+/.test(form_data.email)) {
+    } else if (!/\S+@\S+\.\S+/.test(form_data.email)) {
       error_list.email = "Le courriel n'a pas la bonne forme.";
     }
-    if(!form_data.comment.trim()){
+    if (!form_data.comment.trim()) {
       error_list.comment = "Laissez nous la raison de votre demande"
     }
     if (Object.keys(error_list).length > 0) {
       set_form_errors(error_list);
-      return false; 
+      set_button_text(
+        <div>
+          Réesseyer
+        </div>
+      )
+      return false;
     } else {
       set_form_errors({
         fn: "",
@@ -66,24 +75,41 @@ function Contact() {
         phone: "",
         comment: "",
       });
+
       return true;
     }
   }
-  function handle_submit(event: React.FormEvent<HTMLFormElement>){
+  function handle_submit(event: React.FormEvent<HTMLFormElement>) {
+    set_button_text(
+      <div className="whitespace-nowrap">
+        Soumission <i className='fa-solid fa-spinner animate-spin'></i>
+      </div>
+    )
     event.preventDefault();
-    if(validate_form()){
+
+    if (is_submited === "true") {
+      alert("Nous sommes limité au niveau de l'envoi de courriel. S'il vous plait attendre une réponse par courriel")
+      return
+    }
+    if (validate_form()) {
       emailjs.send(
         email_info.service_id,
         email_info.template_id,
         form_data,
         email_info.public_key
       )
-      .then((response) => {
-        console.log("Email sent successfully", response.status, response.text);
-      })
-      .catch((error) => {
-        console.error("Error sending email:", error);
-      });
+        .then((response) => {
+          console.log("Email sent successfully", response.status, response.text);
+          localStorage.setItem("is_submited", "true")
+          set_button_text(
+            <div className="whitespace-nowrap">
+              Envoyé
+            </div>
+          )
+        })
+        .catch((error) => {
+          console.error("Error sending email:", error);
+        });
     }
   }
 
@@ -92,26 +118,26 @@ function Contact() {
       <div className="w-[80%] mx-auto xl:w-[70%] lg:w-[60%] pb-3">
         <h1>Nous joindre</h1>
         <p>La meilleure facon de nous joindre est soit par courriel : info@campinglaliberte.ca ou sur facebook</p>
-        <p>Pour toutes demande de réservations ou de bois vous pouvez passer par se formulaire et nous vous répondrons par courriel sous les plus brefs délais</p>
+        <p>Pour toutes demande de réservations ou de bois vous pouvez passer par se formulaire et nous vous répondrons par courriel dans les plus brefs délais</p>
       </div>
 
       <section className="w-[90%] mx-auto bg-[#E9EFEC] bg-opacity-60 p-4 gap-3 rounded-xl xl:w-[80%] lg:w-[70%] ">
         <form action="" className=" grid grid-cols-12 row-span-3 gap-3 justify-start w-full relative" onSubmit={handle_submit}>
           <div className="input_container flex flex-col col-span-5 h-fit row-start-1 text-start max-sm:row-start-2 max-sm:col-span-12">
             <label htmlFor="fn">Prénom<span className="text-red-600">*</span> : </label>
-            <input type="text" className="fn" id="fn" value={form_data.fn} onChange={handle_change}/>
+            <input type="text" className="fn" id="fn" value={form_data.fn} onChange={handle_change} />
             {render_error(form_errors.fn)}
           </div>
 
           <div className="input_container row-start-2 col-span-5 text-start max-sm:row-start-3 max-sm:col-span-12">
             <label htmlFor="ln">Nom<span className="text-red-600">*</span> : </label>
-            <input type="text" className="ln" id="ln" value={form_data.ln} onChange={handle_change}/>
+            <input type="text" className="ln" id="ln" value={form_data.ln} onChange={handle_change} />
             {render_error(form_errors.ln)}
           </div>
 
           <div className="input_container row-start-3 col-span-5 text-start col-start-1 max-sm:col-span-12 max-sm:row-start-4 max-sm:col-start-1">
             <label htmlFor="phone">Numéro de <span className="whitespace-nowrap">téléphone<span className="text-red-600">*</span> : </span></label>
-            <input type="text" className="phone" id="phone" value={form_data.phone} onChange={handle_change}/>
+            <input type="text" className="phone" id="phone" value={form_data.phone} onChange={handle_change} />
             {render_error(form_errors.phone)}
           </div>
 
@@ -132,7 +158,7 @@ function Contact() {
 
           <div className="input_container row-start-4 col-span-6 text-start max-sm:col-start-1 max-sm:col-span-12 max-sm:row-start-6">
             <label htmlFor="email">Courriel<span className="text-red-600">*</span> : </label>
-            <input type="text" className="email" id="email" value={form_data.email} onChange={handle_change}/>
+            <input type="text" className="email" id="email" value={form_data.email} onChange={handle_change} />
             {render_error(form_errors.email)}
           </div>
 
@@ -166,7 +192,7 @@ function Contact() {
             </div>
 
           </div>
-          <button className="col-start-11 row-start-4 col-span-2 h-fit max-md:row-start-6 max-md:col-start-5 max-md:col-span-4 md:absolute md:bottom-0 md:right-0 max-sm:col-span-12 max-sm:row-start-10">Soumettre</button>
+          <button className="col-start-11 row-start-4 col-span-2 h-fit max-md:row-start-6 max-md:col-start-5 max-md:col-span-4 md:absolute md:bottom-0 md:right-0 max-sm:col-span-12 max-sm:row-start-10" id="submit" disabled={JSON.parse(is_submited || "false") === true}>{JSON.parse(is_submited || "false") === true ? (<div className="whitespace-nowrap animate-pulse">Envoyé!</div>) : button_text}</button>
         </form>
 
 
