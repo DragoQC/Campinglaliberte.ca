@@ -1,7 +1,6 @@
-import { useEffect, useState } from "react";
-import { useOutletContext, useNavigate, json } from "react-router-dom";
+import {useState } from "react";
 import "../css/contact.css";
-import { render } from "react-dom";
+
 import { email_info } from "../gitignored/email_info"
 import emailjs from "@emailjs/browser";
 
@@ -40,7 +39,6 @@ function Contact() {
     }
   }
   function validate_form() {
-    let is_valid: boolean = true;
     let error_list: any = {};
     if (!form_data.fn.trim()) {
       error_list.fn = "Prénom requis"
@@ -118,7 +116,7 @@ function Contact() {
       <div className="w-[80%] mx-auto lg:w-[70%] xl:w-[60%] pb-3">
         <h1>Nous joindre</h1>
         <p>La meilleure facon de nous joindre est soit par courriel : info@campinglaliberte.ca ou sur facebook</p>
-        <p>Pour toutes demande de réservations ou de bois vous pouvez passer par se formulaire et nous vous répondrons par courriel dans les plus brefs délais</p>
+        <p>Pour toute demande de réservation ou de bois vous pouvez passer par ce formulaire et nous vous répondrons par courriel dans les plus brefs délais</p>
       </div>
 
       <section className="w-[90%] mx-auto bg-[#E9EFEC] bg-opacity-60 p-4 gap-3 rounded-xl  lg:w-[70%] xl:w-[60%]">

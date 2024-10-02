@@ -1,13 +1,7 @@
-import { useEffect, useState } from "react";
-import { useOutletContext, useNavigate } from "react-router-dom";
-import parc from "../img/parc.jpg";
-import bouleau from "../img/bouleau.jpg"
 import ModalImage from "react-modal-image";
 import "../css/tarifs.css";
 import ciel_rose_small from "../img/ciel_rose_small.jpg";
-import ciel_rose_small_small from "../img/ciel_rose_small_small.jpg"; // Added small version
 import tentes from "../img/tentes.jpg";
-import tentes_small from "../img/tentes_small.jpg"; // Added small version
 import arbre_couche_soleil from "../img/arbre_couche_soleil.jpg";
 import arbre_couche_soleil_small from "../img/arbre_couche_soleil_small.jpg";
 import coffe from "../img/coffe.jpg";
@@ -71,7 +65,7 @@ function Tarifs() {
         </div>
       </section>
       <section className="bg-[#C4DAD2]">
-        <h2 className="text-5xl py-4">Petite galerie de photo pour vous donner le gout</h2>
+        <h2 className="text-5xl py-4">Petite galerie de photo pour vous donner le goût</h2>
         
 
 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 px-4">
@@ -96,7 +90,7 @@ function Tarifs() {
             <ModalImage
             small={descente_small}
             large={descente}
-            alt="Notre descente a la rivière"
+            alt="Notre descente à la rivière"
             className="rounded-3xl"
           />
         </div>
@@ -114,7 +108,7 @@ function Tarifs() {
             <ModalImage
             small={beau_coucher_soleil_small}
             large={beau_coucher_soleil}
-            alt="Coucher de solei"
+            alt="Coucher de soleil"
             className="rounded-3xl"
           />
         </div>
@@ -148,7 +142,7 @@ function Tarifs() {
             <ModalImage
             small={benoit_small}
             large={benoit}
-            alt="Benoit"
+            alt="Benoît"
             className="rounded-3xl"
           />
         </div>
@@ -166,7 +160,7 @@ function Tarifs() {
             <ModalImage
             small={fish_small}
             large={fish}
-            alt="La pèche est permise avec un permis"
+            alt="La pêche est permise"
             className="rounded-3xl"
           />
         </div>
@@ -182,7 +176,7 @@ function Tarifs() {
 </div>
 
       </section>
-      <div className="bg-[#C4DAD2]">Photo prises par notre ami : Luc Paillé</div>
+      <div className="bg-[#C4DAD2]">Photos prises par notre ami : Luc Paillé</div>
     </div>
   )
 }

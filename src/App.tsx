@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import Nav from "./component/nav.tsx";
 import Footer from "./component/footer.tsx"
