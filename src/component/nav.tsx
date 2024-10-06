@@ -37,7 +37,7 @@ function Nav() {
       <div className={`top-0 right-0 h-fit p-2 space-y-4 bg-[#E9EFEC]  duration-300 transition-all ${is_open ? "opacity-100" : "opacity-0"} rounded-2xl flex flex-col rounded-tl-2xl overflow-x-hidden overflow-y-visible`}>
         {nav_links.map((link, index) => (
           <Link to={link.path} className="" key={index}>
-            <button key={index} className=" w-full p-2 rounded-xl">
+            <button key={index} className=" w-full p-2 rounded-xl" onClick={toggle_menu}>
               {link.label}
             </button>
           </Link>

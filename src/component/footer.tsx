@@ -1,6 +1,6 @@
 export default function footer() {
   return (
-    <div className="h-fit footer waveAnimation overflow-visible relative text-black mt-4 max-sm:mt-8">
+    <div className="h-fit footer waveAnimation overflow-visible relative text-black pt-4 max-sm:pt-8">
       <div className="absolute w-full  bg-[#E9EFEC] h-fit bg-opacity-50 bottom-0 ">
         <div className="grid grid-cols-12 w-[90%] mx-auto">
           <div className=" flex flex-col text-start col-span-6">

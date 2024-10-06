@@ -21,8 +21,8 @@ import descente from "../img/descente.jpg";
 import descente_small from "../img/descente_small.jpg"; // Added small version
 import benoit from "../img/benoit.jpg";
 import benoit_small from "../img/benoit_small.jpg"; // Added small version
-import coffe2 from "../img/coffe2.jpg";
-import coffe2_small from "../img/coffe2_small.jpg"; // Added small version
+import arbre from "../img/arbre.jpg";
+import arbre_small from "../img/arbre_small.jpg"; // Added small version
 import cuir from "../img/cuir.jpg";
 import cuir_small from "../img/cuir_small.jpg"; // Added small version
 
@@ -166,9 +166,9 @@ function Tarifs() {
         </div>
         <div>
             <ModalImage
-            small={coffe2_small}
-            large={coffe2}
-            alt="Café"
+            small={arbre_small}
+            large={arbre}
+            alt="Arbre"
             className="rounded-3xl"
           />
         </div>

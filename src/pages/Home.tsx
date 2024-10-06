@@ -15,16 +15,21 @@ function Home() {
 
 
       </section>
-      <section className="bg-[#C4DAD2] relative pt-4 top-11 max-w-5xl max-md:top-0 max-md:pt-5 grid grid-cols-12 px-7 mt-2 gap-8 max-sm:grid-cols-6">
-        <div className="col-span-6">
+      <section className="bg-[#C4DAD2] relative pt-4 top-11 w-full max-md:top-0 max-md:pt-5 grid grid-cols-12 px-7 mt-2 gap-8 max-sm:grid-cols-6">
+        <div className="col-span-6 flex justify-center flex-col">
+          <div>
           <h2 className="text-5xl">Nos services</h2>
           <p>
             Nous proposons des terrains locatifs et offrons la vente et la livraison de bois pour
-            agrémenter votre séjour.
+            agrémenter votre séjour. Nous n'offrons aucun autre service.
           </p>
-          <h3 className="pt-1 text-5xl">Notre Engagement</h3>
+          </div>
+         <div>
+         <h3 className="pt-1 text-5xl">Notre Engagement</h3>
           <p>Depuis plus d'un an, nous avons la chance de gérer ces terres. Nous visons à les développer avec de nouveaux
             espaces et à maintenir des terrains bien entretenus pour vous offrir un camping de qualité.</p>
+         </div>
+         
         </div>
         <div className="col-span-6 pb-10">
           <h3 className="text-5xl mb-3">Notre emplacement</h3>

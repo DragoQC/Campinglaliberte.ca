@@ -15,8 +15,9 @@ function Contact() {
     ln: "",
     email: "",
     phone: "",
-    comment: ""
+    comment: "",
   })
+  const [reasons,set_reasons] = useState<string[]>([]);
   const [form_errors, set_form_errors] = useState({
     fn: "",
     ln: "",
@@ -30,6 +31,18 @@ function Contact() {
       ...form_data,
       [event.target.id]: event.target.value,  // Dynamically update form data based on input id
     });
+  }
+  function handle_checkbox(event: React.ChangeEvent<HTMLInputElement>){
+    const { value, checked } = event.target;
+    if (checked) {
+      set_reasons((previous_reasons) => [...previous_reasons, value]);
+    } 
+    // If unchecked, remove the reason from the array
+    else {
+      set_reasons((new_reasons) =>
+        new_reasons.filter((reason) => reason !== value)
+      );
+    }
   }
   function render_error(error_message: string | undefined) {
     if (error_message) {
@@ -90,11 +103,12 @@ function Contact() {
       return
     }
     if (validate_form()) {
+      const reason_string = reasons;
       emailjs.send(
         email_info.service_id,
         email_info.template_id,
-        form_data,
-        email_info.public_key
+        {form_data,reason:reason_string},
+        email_info.public_key,
       )
         .then((response) => {
           console.log("Email sent successfully", response.status, response.text);
@@ -115,8 +129,8 @@ function Contact() {
     <div className="text-black">
       <div className="w-[80%] mx-auto lg:w-[70%] xl:w-[60%] pb-3">
         <h1>Nous joindre</h1>
-        <p>La meilleure facon de nous joindre est soit par courriel : info@campinglaliberte.ca ou sur facebook</p>
-        <p>Pour toute demande de réservation ou de bois vous pouvez passer par ce formulaire et nous vous répondrons par courriel dans les plus brefs délais</p>
+        <p>La meilleure façon de nous joindre est soit par courriel : info@campinglaliberte.ca ou sur Facebook.</p>
+        <p>Pour toute demande de réservation ou de bois vous pouvez passer par ce formulaire et nous vous répondrons par courriel dans les plus brefs délais.</p>
       </div>
 
       <section className="w-[90%] mx-auto bg-[#E9EFEC] bg-opacity-60 p-4 gap-3 rounded-xl  lg:w-[70%] xl:w-[60%]">
@@ -144,11 +158,11 @@ function Contact() {
             <div className="flex flex-row gap-2">
               <div>
                 <label htmlFor="wood" className="text-end">Bois <i className="fa-solid fa-fire my-auto mr-2"></i></label>
-                <input type="checkbox" className="wood" id="wood" />
+                <input type="checkbox" className="wood" id="wood" value="Bois" onChange={handle_checkbox}/>
               </div>
               <div>
                 <label htmlFor="rent" className="text-end">Location <i className="fa-solid fa-tents my-auto mr-2"></i></label>
-                <input type="checkbox" className="rent" id="rent" />
+                <input type="checkbox" className="rent" id="rent" value="Location" onChange={handle_checkbox}/>
               </div>
             </div>
           </div>
@@ -172,7 +186,7 @@ function Contact() {
                 <i className="fa-solid fa-envelope my-auto"></i>
                 <h2 className="text-2xl amatic">info@campinglaliberte.ca</h2>
               </a>
-              <p className="lg:my-2">Pour toutes informations écrivez nous a ce courriel</p>
+              <p className="lg:my-2">Pour toutes informations écrivez nous à ce courriel</p>
             </div>
             <div className="">
               <a href="https://www.facebook.com/CampingLaliberte?locale=fr_CA" className="flex flex-row gap-5 align-middle text-center text-xl">
@@ -186,7 +200,7 @@ function Contact() {
                 <i className="fa-solid fa-location-dot my-auto"></i>
                 <h2 className="text-2xl amatic">Notre localisation</h2>
               </a>
-              <p className="lg:my-2">617 rang saint-louis ouest, lourdes QC</p>
+              <p className="lg:my-2">617 rang Saint-Louis Ouest, Lourdes QC</p>
             </div>
 
           </div>
